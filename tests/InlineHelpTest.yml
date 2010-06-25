@@ -1,0 +1,27 @@
+SiteTree:
+  home:
+    Title: Home
+  about:
+    Title: About Us
+  location:
+    Title: Our Location
+    Parent: =>SiteTree.about
+  contact:
+    Title: Contact Us
+  empty:
+    Title: Empty Page
+
+InlineHelpTopic:
+  all:
+    Title: All Pages Help
+    AttachType: All
+  specific:
+    Title: Specific Pages Help
+    AttachType: Pages
+    Pages: =>SiteTree.about,=>SiteTree.contact
+  children:
+    Title: Child Pages Help
+    AttachType: Children
+    ParentFilter: =>SiteTree.about
+  none:
+    Title: No Page Help
