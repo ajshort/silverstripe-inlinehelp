@@ -10,9 +10,10 @@
 (function($) {
 	<% control HelpItems %>
 		$('$DOMPattern').livequery(function() { $(this).inlineHelp({
+			<% if IconHTML %>icon: '$IconHTML.JS',<% end_if %>
 			<% if IconMy && IconAt %>
 			iconPosition: {
-				<% if IconOffset %>offset: '$IconOffset',<% end_if %>
+				<% if IconOffset %>offset: '$IconOffset.JS',<% end_if %>
 				my: '$IconMy.JS',
 				at: '$IconAt.JS'
 			},

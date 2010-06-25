@@ -17,6 +17,7 @@ class InlineHelpTopic extends DataObject {
 		'ShowTooltip'   => 'Enum("Hover, Click", "Hover")',
 		'TooltipWidth'  => 'Varchar(6)',
 		'TooltipHeight' => 'Varchar(6)',
+		'IconHTML'      => 'HTMLVarchar(255)',
 		'IconMy'        => 'Varchar(15)',
 		'IconAt'        => 'Varchar(15)',
 		'IconOffset'    => 'Varchar(10)',
@@ -110,6 +111,7 @@ class InlineHelpTopic extends DataObject {
 					'Hover' => 'On mouse hover',
 					'Click' => 'On mouse click'
 				)),
+				new TextField('IconHTML', 'Icon HTML code'),
 				new FieldGroup('Help icon position (relative to subject)',
 					new TextField('IconMy', 'my'),
 					new TextField('IconAt', 'at')
