@@ -10,7 +10,7 @@ class InlineHelpTopic extends DataObject {
 	public static $db = array(
 		'Title'         => 'Varchar(100)',
 		'DisplayType'   => 'Enum("Tooltip, Link", "Tooltip")',
-		'Text'          => 'Varchar(255)',
+		'Text'          => 'HTMLText',
 		'Link'          => 'Varchar(100)',
 		'AttachType'    => 'Enum("All, Pages, Children", "Pages")',
 		'DOMPattern'    => 'Varchar(100)',
@@ -84,7 +84,7 @@ class InlineHelpTopic extends DataObject {
 					'Tooltip' => 'Display help text and/or link in tooltip',
 					'Link'    => 'Click the icon to go to the help link'
 				)),
-				new TextField('Text', 'Short help text'),
+				new HtmlEditorField('Text', 'Short help text', 8),
 				new TextField('Link', 'Help link')
 			),
 			new Tab('Subject',

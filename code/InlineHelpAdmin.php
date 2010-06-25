@@ -14,4 +14,9 @@ class InlineHelpAdmin extends ModelAdmin {
 
 	public static $model_importers = array();
 
+	public function init() {
+		parent::init();
+		HtmlEditorConfig::set_active('simple');
+	}
+
 }
