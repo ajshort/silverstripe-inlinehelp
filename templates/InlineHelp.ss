@@ -12,6 +12,7 @@
 		$('$DOMPattern').livequery(function() { $(this).inlineHelp({
 			<% if IconMy && IconAt %>
 			iconPosition: {
+				<% if IconOffset %>offset: '$IconOffset',<% end_if %>
 				my: '$IconMy.JS',
 				at: '$IconAt.JS'
 			},

@@ -19,6 +19,7 @@ class InlineHelpTopic extends DataObject {
 		'TooltipHeight' => 'Varchar(6)',
 		'IconMy'        => 'Varchar(15)',
 		'IconAt'        => 'Varchar(15)',
+		'IconOffset'    => 'Varchar(10)',
 		'TooltipMy'     => 'Varchar(15)',
 		'TooltipAt'     => 'Varchar(15)'
 	);
@@ -112,6 +113,11 @@ class InlineHelpTopic extends DataObject {
 				new FieldGroup('Help icon position (relative to subject)',
 					new TextField('IconMy', 'my'),
 					new TextField('IconAt', 'at')
+				),
+				new FieldGroup('Help icon offset (relative to position)',
+					new TextField('IconOffset', ''),
+					new LiteralField('IconOffsetNote',
+						'format "horizontal vertical" (e.g. "15 -5")')
 				),
 				new FieldGroup('Tooltip position (relative to icon)',
 					new TextField('TooltipMy', 'my'),
