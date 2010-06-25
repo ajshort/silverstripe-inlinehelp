@@ -1,0 +1,49 @@
+.ss-inlinehelp-icon, .ss-inlinehelp-tooltip {
+	position: absolute;
+	top: 0;
+}
+
+.ss-inlinehelp-icon {
+	z-index: 9998;
+}
+
+.ss-inlinehelp-tooltip {
+	z-index: 9999;
+	overflow: hidden;
+}
+
+.ss-inlinehelp-tooltip-title, .ss-inlinehelp-tooltip-link {
+	padding: 2px 4px;
+	border-left: none;
+	border-right: none;
+}
+
+.ss-inlinehelp-tooltip-title {
+	border-top: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+	top: 0;
+	text-align: center;
+	width: 100%;
+}
+
+.ss-inlinehelp-tooltip-content {
+	padding: 4px;
+	left: 0;
+	right: 0;
+	position: absolute;
+}
+
+.ss-inlinehelp-tooltip-link {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-bottom: none;
+	width: 100%;
+}
+
+.ss-inlinehelp-click, .ss-inlinehelp-link {
+	cursor: pointer;
+}
