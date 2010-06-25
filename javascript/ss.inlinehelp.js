@@ -8,7 +8,6 @@
 			type: 'tooltip',
 			title: 'Help',
 			icon: '<span class="ui-icon ui-icon-help"></span>',
-			iconClass: '',
 			iconPosition: {
 				my: 'left top',
 				at: 'right top'
