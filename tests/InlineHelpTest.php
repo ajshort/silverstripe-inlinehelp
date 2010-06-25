@@ -33,4 +33,12 @@ class InlineHelpTest extends SapphireTest {
 				array_values($location->map()));
 	}
 
+	public function testAttachPageType() {
+		$location = $this->objFromFixture('ErrorPage', '404')->getHelpItems();
+
+		$this->assertEquals(2, count($location));
+			$this->assertEquals(array('All Pages Help', 'Error Page Help'),
+				array_values($location->map()));
+	}
+
 }

@@ -35,6 +35,13 @@ class InlineHelpExtension extends DataObjectDecorator {
 
 		$items->merge(DataObject::get('InlineHelpTopic',
 			'"AttachType" = \'All\''));
+		$items->merge(DataObject::get(
+			'InlineHelpTopic',
+			sprintf(
+				'"AttachType" = \'Type\' AND "AttachPageType" = \'%s\'',
+				$this->owner->class
+			)
+		));
 		$items->merge($this->owner->HelpTopics());
 
 		$stack = $this->owner->parentStack();

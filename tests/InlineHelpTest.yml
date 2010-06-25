@@ -11,6 +11,10 @@ SiteTree:
   empty:
     Title: Empty Page
 
+ErrorPage:
+  404:
+    Title: Page Not Found
+
 InlineHelpTopic:
   all:
     Title: All Pages Help
@@ -23,5 +27,9 @@ InlineHelpTopic:
     Title: Child Pages Help
     AttachType: Children
     ParentFilter: =>SiteTree.about
+  type:
+    Title: Error Page Help
+    AttachType: Type
+    AttachPageType: ErrorPage
   none:
     Title: No Page Help

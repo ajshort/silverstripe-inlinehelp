@@ -8,21 +8,22 @@
 class InlineHelpTopic extends DataObject {
 
 	public static $db = array(
-		'Title'         => 'Varchar(100)',
-		'DisplayType'   => 'Enum("Tooltip, Link", "Tooltip")',
-		'Text'          => 'HTMLText',
-		'Link'          => 'Varchar(100)',
-		'AttachType'    => 'Enum("All, Pages, Children", "Pages")',
-		'DOMPattern'    => 'Varchar(100)',
-		'ShowTooltip'   => 'Enum("Hover, Click", "Hover")',
-		'TooltipWidth'  => 'Varchar(6)',
-		'TooltipHeight' => 'Varchar(6)',
-		'IconHTML'      => 'HTMLVarchar(255)',
-		'IconMy'        => 'Varchar(15)',
-		'IconAt'        => 'Varchar(15)',
-		'IconOffset'    => 'Varchar(10)',
-		'TooltipMy'     => 'Varchar(15)',
-		'TooltipAt'     => 'Varchar(15)'
+		'Title'          => 'Varchar(100)',
+		'DisplayType'    => 'Enum("Tooltip, Link", "Tooltip")',
+		'Text'           => 'HTMLText',
+		'Link'           => 'Varchar(100)',
+		'AttachType'     => 'Enum("All, Pages, Children, Type", "Pages")',
+		'AttachPageType' => 'Varchar(100)',
+		'DOMPattern'     => 'Varchar(100)',
+		'ShowTooltip'    => 'Enum("Hover, Click", "Hover")',
+		'TooltipWidth'   => 'Varchar(6)',
+		'TooltipHeight'  => 'Varchar(6)',
+		'IconHTML'       => 'HTMLVarchar(255)',
+		'IconMy'         => 'Varchar(15)',
+		'IconAt'         => 'Varchar(15)',
+		'IconOffset'     => 'Varchar(10)',
+		'TooltipMy'      => 'Varchar(15)',
+		'TooltipAt'      => 'Varchar(15)'
 	);
 
 	public static $has_one = array(
@@ -47,9 +48,10 @@ class InlineHelpTopic extends DataObject {
 
 	public static $searchable_fields = array(
 		'Title'       => array('filter' => 'PartialMatchFilter'),
+		'AttachType'  => array('filter' => 'ExactMatchFilter'),
 		'DisplayType' => array('filter' => 'ExactMatchFilter'),
-		'Text'        => array('title' => 'Help text', 'filter' => 'PartialMatchFilter'),
-		'Link'        => array('title' => 'Help link', 'filter' => 'PartialMatchFilter')
+		'Text'        => array('title'  => 'Help text', 'filter' => 'PartialMatchFilter'),
+		'Link'        => array('title'  => 'Help link', 'filter' => 'PartialMatchFilter')
 	);
 
 	/**
@@ -66,6 +68,8 @@ class InlineHelpTopic extends DataObject {
 				return 'Specific pages: ' . implode(', ', $this->Pages()->map());
 			case 'Children':
 				return 'Children of ' . $this->ParentFilter()->Title;
+			case 'Type':
+				return 'Pages of type ' . $this->AttachPageType;
 		}
 	}
 
@@ -100,10 +104,14 @@ class InlineHelpTopic extends DataObject {
 				new OptionSetField('AttachType', '', array(
 					'All'      => 'All pages',
 					'Pages'    => 'Specific pages',
-					'Children' => 'Children of the selected page'
+					'Children' => 'Children of the selected page',
+					'Type'     => 'Instances of a specific page type'
 				)),
 				new TreeMultiSelectField('Pages', 'Pages', 'SiteTree'),
-				new TreeDropdownField('ParentFilterID', 'Parent page', 'SiteTree')
+				new TreeDropdownField('ParentFilterID', 'Parent page', 'SiteTree'),
+				new DropdownField('AttachPageType', 'Page type', ArrayLib::valuekey(
+					ClassInfo::subclassesFor('Page')
+				))
 			),
 			new Tab('Advanced',
 				new HeaderField('AdvancedHeader', 'Advanced Inline Help Options'),
