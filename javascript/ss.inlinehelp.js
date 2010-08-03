@@ -31,6 +31,15 @@
 		_init: function() {
 			var widget = this;
 
+			var updatePosition = function () {
+				widget.icon.position($.extend(widget.options.iconPosition, {
+					of: widget.element
+				}));
+			}
+
+			$(window).scroll(updatePosition);
+			var updateInterval = setInterval(updatePosition, 1000);
+
 			if (this.options.type == 'link') {
 				this.link = $('<a></a>')
 					.addClass('ss-inlinehelp-link')
