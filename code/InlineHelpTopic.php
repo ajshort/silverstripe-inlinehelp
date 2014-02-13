@@ -77,10 +77,10 @@ class InlineHelpTopic extends DataObject {
 	 * @return FieldSet
 	 */
 	public function getCMSFields() {
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+		//Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('inlinehelp/javascript/InlineHelpAdmin.js');
 
-		return new FieldSet(new TabSet('Root',
+		return new FieldList(new TabSet('Root',
 			new Tab('Main',
 				new HeaderField('HelpHeader', 'Help Topic'),
 				new TextField('Title', 'Title'),

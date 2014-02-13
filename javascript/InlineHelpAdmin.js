@@ -1,5 +1,5 @@
 ;(function($) {
-	Behaviour.register({
+	/*Behaviour.register({
 		'#AttachType': {
 			initialize: function() {
 				$(this).find(':checked').change();
@@ -10,7 +10,7 @@
 				$(this).find(':checked').change();
 			}
 		}
-	});
+	});*/
 
 	$('#AttachType :radio').live('change', function() {
 		switch ($(this).val()) {
