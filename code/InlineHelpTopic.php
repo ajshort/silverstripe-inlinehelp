@@ -60,27 +60,27 @@ class InlineHelpTopic extends DataObject {
 	 *
 	 * @return string
 	 */
-	public function getAttachedTo() {
-		switch ($this->AttachType) {
-			case 'All':
-				return 'All pages';
-			case 'Pages':
-				return 'Specific pages: ' . implode(', ', $this->Pages()->map());
-			case 'Children':
-				return 'Children of ' . $this->ParentFilter()->Title;
-			case 'Type':
-				return 'Pages of type ' . $this->AttachPageType;
-		}
-	}
+    public function getAttachedTo() {
+        switch ($this->AttachType) {
+            case 'All':
+                return 'All pages';
+            case 'Pages':
+                if($this->Pages()->Count() >0)return 'Specific pages: ' . implode(', ', $this->Pages()->toArray()->map());
+            case 'Children':
+                return 'Children of ' . $this->ParentFilter()->Title;
+            case 'Type':
+                return 'Pages of type ' . $this->AttachPageType;
+        }
+    }
 
 	/**
 	 * @return FieldSet
 	 */
 	public function getCMSFields() {
-		Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
+		//Requirements::javascript(THIRDPARTY_DIR . '/jquery/jquery.js');
 		Requirements::javascript('inlinehelp/javascript/InlineHelpAdmin.js');
 
-		return new FieldSet(new TabSet('Root',
+		return new FieldList(new TabSet('Root',
 			new Tab('Main',
 				new HeaderField('HelpHeader', 'Help Topic'),
 				new TextField('Title', 'Title'),

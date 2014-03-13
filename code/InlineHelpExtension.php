@@ -4,16 +4,14 @@
  *
  * @package silverstripe-inlinehelp
  */
-class InlineHelpExtension extends DataObjectDecorator {
+class InlineHelpExtension extends DataExtension {
 
 	/**
 	 * @return array
 	 */
-	public function extraStatics() {
-		return array('belongs_many_many' => array(
-			'HelpTopics' => 'InlineHelpTopic'
-		));
-	}
+    static $belongs_many_many = array(
+        'HelpTopics' => 'InlineHelpTopic'
+    );
 
 	/**
 	 * Includes the required JS libraries and inline help definitions.
@@ -31,13 +29,10 @@ class InlineHelpExtension extends DataObjectDecorator {
 	 * @return InlineHelpTopic[]
 	 */
 	public function getHelpItems() {
-		$items = new DataObjectSet();
+		$items = new ArrayList();
 
-		$items->merge(DataObject::get('InlineHelpTopic',
-			'"AttachType" = \'All\''));
-		$items->merge(DataObject::get(
-			'InlineHelpTopic',
-			sprintf(
+		$items->merge(InlineHelpTopic::get()->where('"AttachType" = \'All\''));
+		$items->merge(InlineHelpTopic::get()->where(sprintf(
 				'"AttachType" = \'Type\' AND "AttachPageType" = \'%s\'',
 				$this->owner->class
 			)
@@ -48,7 +43,7 @@ class InlineHelpExtension extends DataObjectDecorator {
 		array_shift($stack);
 
 		if ($stack) {
-			$items->merge(DataObject::get('InlineHelpTopic', sprintf(
+			$items->merge(InlineHelpTopic::get()->where( sprintf(
 				'"AttachType" = \'Children\' AND "ParentFilterID" IN(%s)',
 				implode(', ',
 					array_map(create_function('$self', 'return $self->ID;'),
