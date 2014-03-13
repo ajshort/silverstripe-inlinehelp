@@ -60,18 +60,18 @@ class InlineHelpTopic extends DataObject {
 	 *
 	 * @return string
 	 */
-	public function getAttachedTo() {
-		switch ($this->AttachType) {
-			case 'All':
-				return 'All pages';
-			case 'Pages':
-				return 'Specific pages: ' . implode(', ', $this->Pages()->map());
-			case 'Children':
-				return 'Children of ' . $this->ParentFilter()->Title;
-			case 'Type':
-				return 'Pages of type ' . $this->AttachPageType;
-		}
-	}
+    public function getAttachedTo() {
+        switch ($this->AttachType) {
+            case 'All':
+                return 'All pages';
+            case 'Pages':
+                if($this->Pages()->Count() >0)return 'Specific pages: ' . implode(', ', $this->Pages()->toArray()->map());
+            case 'Children':
+                return 'Children of ' . $this->ParentFilter()->Title;
+            case 'Type':
+                return 'Pages of type ' . $this->AttachPageType;
+        }
+    }
 
 	/**
 	 * @return FieldSet
